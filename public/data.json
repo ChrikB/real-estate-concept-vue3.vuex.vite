@@ -38,8 +38,8 @@
 					"2023-02-26T12:20:00.000Z"
 				],
 				"imgs": [
-					"assets/aguimes-g09e389e65_640.jpg",
-					"assets/architect-1080592_960_720.jpg"
+					"imgs/aguimes-g09e389e65_640.jpg",
+					"imgs/architect-1080592_960_720.jpg"
 				],
 				"bundles": [
 					{
@@ -105,7 +105,7 @@
 				"pricePerDay": 60,
 				"availability": "",
 				"imgs": [
-					"assets/ameland-g7480aa798_640.jpg"
+					"imgs/ameland-g7480aa798_640.jpg"
 				],
 				"bundles": [],
 				"id": 1676723121682,
@@ -129,7 +129,7 @@
 				"pricePerDay": 300,
 				"availability": [],
 				"imgs": [
-					"assets/coast-g0d5b7d822_640.jpg"
+					"imgs/coast-g0d5b7d822_640.jpg"
 				],
 				"bundles": [
 					{
@@ -177,7 +177,7 @@
 				"pricePerDay": 140,
 				"availability": "",
 				"imgs": [
-					"assets/dining-room-g2f569b87b_640.jpg"
+					"imgs/dining-room-g2f569b87b_640.jpg"
 				],
 				"bundles": [],
 				"id": 1676727112739,
@@ -200,7 +200,7 @@
 				"pricePerDay": 60,
 				"availability": [],
 				"imgs": [
-					"assets/fantasy-gd83db634c_640.jpg"
+					"imgs/fantasy-gd83db634c_640.jpg"
 				],
 				"bundles": [
 					{
@@ -251,7 +251,7 @@
 				"pricePerDay": 54,
 				"availability": [],
 				"imgs": [
-					"assets/home-gd3cc96f95_640.jpg"
+					"imgs/home-gd3cc96f95_640.jpg"
 				],
 				"bundles": [],
 				"id": 1676726906243,
@@ -287,7 +287,7 @@
 				"pricePerDay": 55,
 				"availability": [],
 				"imgs": [
-					"assets/hd-wallpaper-gd451f3214_640.jpg"
+					"imgs/hd-wallpaper-gd451f3214_640.jpg"
 				],
 				"bundles": [
 					{
@@ -349,8 +349,8 @@
 					"2023-04-24T12:23:00.000Z"
 				],
 				"imgs": [
-					"assets/kitchen-gdec289e57_640.jpg",
-					"assets/living-room-ge106c1a4d_640.jpg"
+					"imgs/kitchen-gdec289e57_640.jpg",
+					"imgs/living-room-ge106c1a4d_640.jpg"
 				],
 				"bundles": [
 					{
@@ -398,7 +398,7 @@
 				"pricePerDay": 28,
 				"availability": [],
 				"imgs": [
-					"assets/house-g84f55af92_640.jpg"
+					"imgs/house-g84f55af92_640.jpg"
 				],
 				"bundles": [],
 				"id": 1676726292139,
@@ -444,7 +444,7 @@
 					"2023-02-27T12:27:00.000Z"
 				],
 				"imgs": [
-					"assets/stone-house-g7f8a6b571_640.jpg"
+					"imgs/stone-house-g7f8a6b571_640.jpg"
 				],
 				"bundles": [
 					{
@@ -498,7 +498,7 @@
 					"2023-03-31T11:31:00.000Z"
 				],
 				"imgs": [
-					"assets/house-gec04e87fb_640.jpg"
+					"imgs/house-gec04e87fb_640.jpg"
 				],
 				"bundles": [
 					{
@@ -546,7 +546,7 @@
 				"pricePerDay": 250,
 				"availability": [],
 				"imgs": [
-					"assets/lighthouse-g43208b366_640.jpg"
+					"imgs/lighthouse-g43208b366_640.jpg"
 				],
 				"bundles": [],
 				"id": 1676725781552,

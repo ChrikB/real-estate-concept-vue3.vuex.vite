@@ -13,7 +13,7 @@
           <figure> 
             <div 
               class="building-thumb building-thumb-main m-auto" 
-              :style="{'background-image': (buildingSearchResult.imgs&&buildingSearchResult.imgs.length>0)? 'url('+buildingSearchResult.imgs[0]+')':'' }"
+              :style="{'background-image': (buildingSearchResult.imgs&&buildingSearchResult.imgs.length>0)? 'url('+ imgPath(buildingSearchResult.imgs[0]) + ')':'' }"
             ></div>
             <figcaption></figcaption>
           </figure>
@@ -112,7 +112,7 @@
             data-building="bundles"   
             class="building-bundles align-items-center"
           >
-            <a v-if="itHasBundles()" :href="'/buildings/' + buildingSearchResult.id + '#bundles'">See bundles</a>
+            <a v-if="itHasBundles()"  :href="publicPath + 'buildings/' + buildingSearchResult.id + '#bundles'">See bundles</a>
           </div>
 </div>
 
@@ -133,16 +133,39 @@ export default {
     buildingSearchResult:{}
   },
   data() {
-    return {}
+    return {
+      publicPath: import.meta.env.BASE_URL
+    }
   },
   methods: {
-    itHasBundles(){
+    isValidHttpUrl(string) {
+      let url;
+      try {
+        url = new URL(string);
+      } catch (_) {
+        return false;
+      }
+      return url.protocol === "http:" || url.protocol === "https:";
+    },
+    imgPath(x) {
+      /* means it is  base64 or blob */
+      if (x.length>100 || /blob/i.test(x) || /base64/i.test(x) ){      
+        return x;
+      }
+      /* means that img path is http */
+      if ( this.isValidHttpUrl(x) ) {
+        return x;
+      }
+      /* means that img path is static file in folder */
+      return this.publicPath + x;
+    },
+    itHasBundles(){    
       if( this.buildingSearchResult&&this.buildingSearchResult.bundles&&this.buildingSearchResult.bundles.length>0 ){
         return true;
       }
       return false;
     }
-  }  
+  }
 }
 </script>
 

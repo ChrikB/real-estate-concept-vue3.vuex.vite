@@ -6,6 +6,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  _base: './',
+  base: '/projects/real-estate-concept-vue3-vuex-vite/',
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {

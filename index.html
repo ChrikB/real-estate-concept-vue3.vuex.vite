@@ -3,14 +3,40 @@
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
+    <title>Vue 3/Vuex/Vite Real Estate Concept by Chris B</title>
+    <meta name="author" content="Chris B">
+    <meta name="keywords" content="vue vue3 vuex bootstrap5 vite real-estate-concept">
+    <meta name="description" content="Real-estate concept demo based on vue3,vuex and vite">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
     crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
     crossorigin=""></script>
+
+    <style>
+      body{
+          overflow: hidden;
+      }
+      .footer_wrapper{
+          background-color: rgb(33, 37, 41);
+          overflow: hidden;
+          text-align: right;
+          padding-right: 30px;
+          font-size: 17px; 
+      }
+      p.footer {
+        margin: 0;
+        color: wheat;
+      }
+      @media only screen and (max-width: 600px) {
+          .footer_wrapper {
+              text-align: center;
+              padding: 0;
+          }
+      }
+  </style>
   </head>
   <body>
     <div id="app"></div>

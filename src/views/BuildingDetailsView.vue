@@ -31,24 +31,23 @@ export default {
       let criteria;
       let buildingId =  parseInt(this.$route.params.id, 10) ;
       if (buildingId && buildingId >=0){
-       criteria = {buildingId: buildingId}; //alert('buildingId AAA is ' + buildingId )
-      }else { //alert('buildingId is ' + buildingId )
+       criteria = {buildingId: buildingId}; 
+      }else { 
         this.building = null;
         return;
       }
-      let buildingsFound = this.$store.getters.getBuildings(criteria); // alert('doSearch LENGHT'+ buildingsFound.length);
+      let buildingsFound = this.$store.getters.getBuildings(criteria); 
       if (buildingsFound.length>0) {
-        this.building = buildingsFound[0];   // alert('doSearch' + this.building.id);
+        this.building = buildingsFound[0];  
       }
-      console.log('buildingsFound_', buildingsFound);
+     // console.log('buildingsFound_', buildingsFound);
     }
   },
   mounted(){
     /*
-    let buildingId =  parseInt(this.$route.params.id, 10) ; //alert(buildingId);
+    let buildingId =  parseInt(this.$route.params.id, 10) ; 
     if (buildingId && buildingId >=0){
       this.doSearch({buildingId: buildingId});
-      alert(buildingId);
     }
     */
     this.doSearch();
@@ -62,7 +61,7 @@ export default {
         if (this.initialLoad === false && newVal=== false){
           this.doSearch();
           this.initialLoad = true;
-          console.log('appDataLoading changed', newVal);
+        //  console.log('appDataLoading changed', newVal);
         }
       }
     }

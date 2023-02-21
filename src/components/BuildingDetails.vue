@@ -1,16 +1,15 @@
 
 
 <template>
-  <div class="buildingDetails-component" style="max-width: 1200px;">
+  <div class="buildingDetails-component">
     <h1 class="d-none text-capitalize" v-if="buildingDataProp">{{buildingDataProp.buildingName}}</h1>
     <div class="row">
       <div class="col-12 col-md-6">
 
         <div 
           id="carouselCaptions" 
-          class="carousel slide m-auto" 
-          data-bs-ride="carousel" 
-          style="max-width: 500px;padding-bottom: 70px;"
+          class="carousel slide m-auto"
+          data-bs-ride="carousel"              
         > 
           <div 
             class="carousel-indicators m-auto w-100" 
@@ -154,11 +153,24 @@
         </div>
       </div>      
     </div>
-    <div class="row" style="min-width: 300px;min-height: 400px;">
+    <div class="row availability-row">
       <div class="col-12 mt-5 mb-3"><hr class="m-auto w-75"></div>
       <div class="col-12 col-md-6 datepicker-col">
-        <h5 class="mt-3 mb-3">Available Dates</h5>
+        <h5 
+          class="mt-3 mb-3" 
+          :class="{'opacity-50': (!buildingDataProp||!buildingDataProp.availability) }"
+        >
+          Available Dates
+        </h5>
+        <div 
+          v-if="!buildingDataProp||!buildingDataProp.availability" 
+          class="d-flex h-75 align-items-center" 
+          style="min-height: 200px;"
+        >
+          <h3 class="m-auto text-danger shadowred">Unavailable</h3>
+        </div>
         <Datepicker 
+          v-if="buildingDataProp&&buildingDataProp.availability"
           _dark
           style="justify-content: center;" 
           v-model="dateValue"  
@@ -174,12 +186,12 @@
       </div>
       <div class="col-12 col-md-6 map-col">  
         <h5 class="mt-3 mb-3">Location</h5>
-        <div class="map-cont mt-3" style=" margin:auto;">
+        <div class="map-cont mt-3 m-auto">
           <div id="map" class="m-auto  h-100"></div>
         </div>
       </div>
     </div>
-    <div class="row" style="min-width: 300px; min-height: 400px;">
+    <div class="row bundle-row"> 
       <div 
         id="bundles"
         class="col text-start mt-5"
@@ -189,7 +201,7 @@
         :key="bundle"
       >
 
-                    <div class="bundle mt-3 mb-3 text-center mx-auto" style="width:300px;"> 
+                    <div class="bundle mt-3 mb-3 text-center mx-auto"> 
                         <h5>{{bundle.name||'Unnamed'}}</h5>
                         <p class="d-inline-block p-1 fw-bold card-savingsMessage">
                           Save 
@@ -236,7 +248,7 @@
                           v-if="bundle.dates.length>0"
                         >
                           <label class="fw-bold d-none">Available for</label>
-                          <span class="p-2 d-block fw-bold text-decoration-underline"  style="color:green;">{{ reformDate(bundle.dates) }}</span>
+                          <span class="p-2 d-block fw-bold text-decoration-underline text-success">{{ reformDate(bundle.dates) }}</span>
                         </div>
 
                         <div 
@@ -285,9 +297,11 @@ export default {
   },
   data() {
     return {
+      publicPath: import.meta.env.BASE_URL,
       bundleStaticProps: ['bundlePrice', 'duration', 'name', 'dates', 'days'],
       leaflet: null,
       dateValue: [],
+     // allowedDates: null,
       d: {
         username: "",
         buildingName: "",
@@ -303,8 +317,8 @@ export default {
         rooms: "",
         pricePerDay: "",
         availability: "",
-        imgs:[],
-        bundles:[],
+        imgs: [],
+        bundles: [],
       }
     }
   },
@@ -319,13 +333,32 @@ export default {
       this.$router.push({ path: '/building/' + this.buildingDataProp.id })
     },
 
+    isValidHttpUrl(string) {
+      let url;
+      try {
+        url = new URL(string);
+      } catch (_) {
+        return false;
+      }
+      return url.protocol === "http:" || url.protocol === "https:";
+    },
+
     getPath(x){
-      if (x.length>100 || /blob/i.test(x) || /base64/i.test(x) ){
-        /* means it is  base64 or blob */
+      /* means it is  base64 or blob */
+      if (x.length>100 || /blob/i.test(x) || /base64/i.test(x) ){     
+        return x;
+      }
+      /* means that img path is http */
+      if ( this.isValidHttpUrl(x) ) {
         return x;
       }
       /* otherwise its a string path */
-      return new URL('./../../' + x, import.meta.url).href
+      if ( process.env.NODE_ENV === 'development' ) {   
+        return new URL('./../../' + x, import.meta.url).href
+      }else{
+       // return new URL('./../' + x, import.meta.url).href;
+        return new URL( this.publicPath + x, import.meta.url).href;
+      }
     },
 
     calcBundleSavings(bundle){
@@ -434,7 +467,34 @@ export default {
 
 <style>
 
-.buildingDetails-component .demo-disabled:after{
+  .buildingDetails-component{
+    max-width: 1200px;
+  }
+
+  .buildingDetails-component .carousel { 
+    max-width: 500px;
+    padding-bottom: 70px; 
+  }
+
+  .buildingDetails-component .bundle-row,
+  .buildingDetails-component .availability-row {
+    min-width: 300px;
+    min-height: 400px;
+  }
+
+  .buildingDetails-component .bundle-row .bundle {
+    width: 300px; 
+  }
+
+  .buildingDetails-component .row.availability-row .shadowred { 
+    text-shadow: 0px 4px 20px; 
+    -webkit-text-shadow: 0px 4px 20px; 
+    -moz-text-shadow: 0px 4px 20px; 
+    -ms-text-shadow: 0px 4px 20px; 
+	  -o-text-shadow: 0px 4px 20px; 
+  }
+
+  .buildingDetails-component .demo-disabled:after{
     content: 'Disabled';
     position: absolute;
     color: rgba(255, 255, 255, 0);
@@ -463,12 +523,12 @@ export default {
     background-size:cover; 
     width: 100%;
     max-width: 500px; 
-    height:350px;
+    height: 350px;
   }
 
   .buildingDetails-component .bundle {
     padding: 10px;
-    border:1px solid rgba(0,0,0,0.14);
+    border: 1px solid rgba(0,0,0,0.14);
     border-radius: 5px;
   }
 
@@ -481,7 +541,7 @@ export default {
   }
 
   .buildingDetails-component .card-savingsMessage{ 
-    background:rgb(235, 255, 229); 
+    background: rgb(235, 255, 229); 
   }
 
   .buildingDetails-component .map-cont{

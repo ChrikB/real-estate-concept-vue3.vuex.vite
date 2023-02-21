@@ -120,7 +120,6 @@ const store = createStore({
   mutations: {
     setData(state, httpRessponse){
       state.users = httpRessponse;
-      console.log('USERS ARE', state.users);
       state.appDataLoading = false;
     },
 
@@ -212,8 +211,8 @@ const store = createStore({
 
 
     getDataHTTP (context) {
-
-      fetch('./../src/assets/data.json', {
+ 
+      fetch( import.meta.env.BASE_URL + 'data.json', {  
         method: 'GET'
       })
       .then((response) => response.json())

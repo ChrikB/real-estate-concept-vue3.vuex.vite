@@ -104,6 +104,9 @@ export default {
   components: {},
   mounted() { 
     this.$store.dispatch('getDataHTTP');
+
+    this.$router.push({ path: '/buildings/' });
+  
   },
   methods: {},
   data(){

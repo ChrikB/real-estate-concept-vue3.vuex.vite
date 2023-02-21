@@ -55,7 +55,6 @@ export default {
 
       let usersFound = this.$store.getters.getUsers(criteria);
       this.users = usersFound;
-      console.log('usersFound', criteria, usersFound);
     }
   },
   watch: {

@@ -40,7 +40,7 @@ export default {
       if (buildingsFound.length>0) {
         this.building = buildingsFound[0];   
       }
-      console.log('buildingsFound_', buildingsFound);   
+         
     }
   },
   mounted(){  
@@ -54,7 +54,6 @@ export default {
         if (this.initialLoad === false && newVal=== false){
           this.getBuildingData();
           this.initialLoad = true;
-          console.log('appDataLoading changed, UPDATE PAGE', newVal);
         }
       }
     }

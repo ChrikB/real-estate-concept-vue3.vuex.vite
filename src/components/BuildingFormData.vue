@@ -162,6 +162,7 @@
                       v-model="countrySelectedIndex"  
                       aria-label="Default select example" 
                       id="exampleCheck1"
+                      @change="updateCountryIndex"
                     >
                       <option  
                         v-for="(option, index) in countries" 
@@ -490,6 +491,7 @@ export default {
         this.dataPropSynch();
       }
     },
+    /*
     'countrySelectedIndex'(newValue, oldValue) { 
       if(newValue||newValue===0){
         let countryMapObj = this.countries[newValue];
@@ -506,6 +508,7 @@ export default {
         this.updateLeafMap(this.d.map, true);
       }
     },
+    */
     'dateValue'(newValue, oldValue){   
       if(!newValue){return;}   
 
@@ -528,6 +531,22 @@ export default {
   },
   methods:{
 
+    updateCountryIndex(ev){
+
+      let newValue = ev.target.value;
+      if(newValue||newValue===0) {
+        let countryMapObj = this.countries[newValue];
+        this.d.country = countryMapObj.long_name; 
+       
+          this.d.map = {
+            lat: countryMapObj.center_lat, 
+            lng: countryMapObj.center_lng 
+          };
+
+        this.updateLeafMap(this.d.map, true);
+      }
+    },
+
     getCountryIndexByName(formData){
       let len = this.countries.length;
       for (let i =0; i< len; i++) {
@@ -547,13 +566,30 @@ export default {
       console.log(this.d.availability, this.d);
     },
 
+    isValidHttpUrl(string) {
+      let url;
+      try {
+        url = new URL(string);
+      } catch (_) {
+        return false;
+      }
+      return url.protocol === "http:" || url.protocol === "https:";
+    },
     getPath(x){
       if (x.length>100 || /blob/i.test(x) || /base64/i.test(x) ){
         /* means it is  base64 or blob */
         return x;
       }
+      /* means that img path is http */
+      if ( this.isValidHttpUrl(x) ) {
+        return x;
+      }
       /* otherwise its a string path */
-      return new URL('./../../' + x, import.meta.url).href
+      if ( process.env.NODE_ENV === 'development' ) {  
+        return new URL('./../../' + x, import.meta.url).href
+      }else{
+        return new URL('./../' + x, import.meta.url).href;
+      }
     },
 
     dataPropSynch(){
@@ -645,7 +681,7 @@ export default {
 
     updateBundle(bundle, index){
       this.d.bundles[index] = {...bundle};
-      console.log('updated bundle');
+     
     },
 
 
@@ -665,7 +701,7 @@ export default {
       }
     },
 
-    updateLeafMap(countryOption, setView){ 
+    updateLeafMap(countryOption, setView){  
       if (!countryOption||!countryOption.lat||!countryOption.lng){
         return;
       }
