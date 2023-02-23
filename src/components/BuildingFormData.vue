@@ -637,20 +637,27 @@ export default {
     },
 
     imgUpload(event){ 
+      let THAT = this;
       let evTarget = event.target;
       if (evTarget.files && evTarget.files[0]) {
  
-          var img = document.createElement('img');
+          let img = document.createElement('img');
           img.onload = () => {
-              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+
+
+            THAT.d.imgs.push(img.src);
+        //      URL.revokeObjectURL(img.src);  // no longer needed, free memory
+
+
+
           }
           img.setAttribute('class', 'dashboard dashboard-building-thumb')
 
-          img.src = URL.createObjectURL(evTarget.files[0]); // set src to blob url
+         img.src = URL.createObjectURL(evTarget.files[0]); // set src to blob url
 
           //let yyy = new URL('./../../' + img.src, import.meta.url).href;
           //this.d.imgs.push(yyy);
-          this.d.imgs.push(img.src);
+         //this.d.imgs.push(img.src);
       }
 
     },
